@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import Preloader from "../../components/common/preloader/preloader";
 import PostItem from "../../components/postItem/postItem";
-import { apiGetPosts } from './../../services/api/postsService';
+import { apiPostBeerName } from './../../services/api/postsService';
 
 /**
  *
@@ -17,22 +17,24 @@ class MainPage extends React.Component {
         this.state = {
             error: null,
             isLoaded: false,
-            data: {},
-            items: {}
+            items: [],
+            value: ''
         };
+        //this.handleChange = this.handleChange.bind(this);
+        //this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    /**
-     *
-     */
-    componentDidMount() {
-        apiGetPosts()
+    handleChange = (event) => {
+        this.setState({value: event.target.value});
+    };
+
+    loadPosts() {
+        apiPostBeerName(this.state.value)
             .then(response => {
-                //console.log(response.data);
+                console.log(response.data);
                 this.setState({
                     isLoaded: true,
-                    data: response.data,
-                    items: response.data.articles
+                    items: response.data
                 });
             })
             .catch(error => {
@@ -42,6 +44,18 @@ class MainPage extends React.Component {
                     error
                 });
             });
+    }
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+        this.loadPosts();
+    };
+
+    /**
+     *
+     */
+    componentDidMount() {
+        this.loadPosts();
     }
 
     /**
@@ -57,17 +71,25 @@ class MainPage extends React.Component {
             return <Preloader />;
         } else {
             return (
-                <div className="row">
-                    {items.map(item => (
-                        <PostItem key={item.title}
-                                  image={item.urlToImage}
-                                  title={item.title}
-                                  url={item.url}
-                                  author={item.author}
-                                  date={item.publishedAt}
-                        />
-                    ))}
-                </div>
+                <Fragment>
+                    <div className="">
+                        <form onSubmit={this.handleSubmit}>
+                            <input type="text" name="name" placeholder="Search beers..."  value={this.state.value} onChange={this.handleChange}/>
+                            <input type="submit" value="Отправить" />
+                        </form>
+                    </div>
+
+                    <div className="row">
+
+                        {items.map(item => (
+                            <PostItem key={item.id}
+                                      image={item.image_url}
+                                      name={item.name}
+                                      tagline={item.tagline}
+                            />
+                        ))}
+                    </div>
+                </Fragment>
             );
         }
     }

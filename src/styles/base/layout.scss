@@ -46,7 +46,7 @@ body {
         &-image {
           height: 250px;
           background-repeat: no-repeat;
-          background-size: inherit;
+          background-size: contain;
           background-position: center;
 
           &.no-photo {

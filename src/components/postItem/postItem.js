@@ -3,12 +3,6 @@ import './postItem.scss';
 
 class PostItem extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-
-        };
-    }
 
     render() {
         return (
@@ -22,8 +16,12 @@ class PostItem extends React.Component {
                     )}
 
                     <div className="item-card-info">
-                        <div className="item-card-name">{this.props.title}</div>
-                        <a className="button btn-fb" href={this.props.url}>Learn more</a>
+                        <div className="item-card-name">{this.props.name}</div>
+                        <div className="item-card-tagline">{this.props.tagline}</div>
+                        <div>
+                            <a className="button btn-fb" href="/">Open</a>
+                            <a className="button btn-fb" href="/">Favourites</a>
+                        </div>
                     </div>
                 </div>
             </div>
