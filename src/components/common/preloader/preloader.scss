@@ -1,0 +1,27 @@
+.preloader {
+  width: 100%;
+  min-height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  background-color: rgba(50,50,50,0.4);
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.logo-rotate {
+  animation: 1s linear 0s normal none infinite running rotate;
+  -webkit-animation: 1s linear 0s normal none infinite running rotate;
+
+}
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

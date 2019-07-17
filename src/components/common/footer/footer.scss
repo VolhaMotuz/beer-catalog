@@ -1,0 +1,11 @@
+.footer {
+  background-color: #333333;
+  padding: 40px 0;
+  color: #ffffff;
+  font-size: 14px;
+
+  &-column {
+    padding: 0 15px;
+    box-sizing: border-box;
+  }
+}
