@@ -34,47 +34,5 @@ body {
     flex-grow: 1;
     padding-top: 30px;
     padding-bottom: 50px;
-
-    .item {
-      padding: 0 15px;
-      margin-top: 30px;
-      box-sizing: border-box;
-
-      &-card {
-        border: 1px solid #C9C9C9;
-
-        &-image {
-          height: 250px;
-          background-repeat: no-repeat;
-          background-size: contain;
-          background-position: center;
-
-          &.no-photo {
-            background-image: url("../assets/noImg.jpg");
-          }
-        }
-
-        &-info {
-          padding: 20px 10px;
-        }
-
-        &-name {
-          padding-bottom: 15px;
-        }
-
-        &-price {
-          padding-bottom: 30px;
-          font-weight: bold;
-        }
-
-        .button {
-          width: 200px;
-          height: 40px;
-          text-align: center;
-          display: block;
-          margin: 0 auto;
-        }
-      }
-    }
   }
 }

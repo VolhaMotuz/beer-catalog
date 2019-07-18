@@ -19,6 +19,7 @@
 .grid--container {
   margin: 0 auto;
   max-width: 1200px;
+  width: calc(100% - 30px);
   padding: 0 15px;
 }
 

@@ -35,8 +35,7 @@ class Menu extends React.Component {
                     <div className="menu__content_navigation">
                         <ul>
                             <li><Link to="/">Home</Link></li>
-                            <li><Link to="/about">About Us</Link></li>
-                            <li><Link to="/contacts">Contacts</Link></li>
+                            <li><Link to="/favourites">Favourites</Link></li>
                         </ul>
                     </div>
                 </div>

@@ -1,0 +1,55 @@
+.item {
+  padding: 0 15px;
+  margin-top: 60px;
+  box-sizing: border-box;
+
+  &-card {
+
+    &-info {
+      background: #F2F8FD;
+      font-size: 14px;
+    }
+
+    &-image {
+      height: 250px;
+      margin-bottom: 15px;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+
+      &.no-photo {
+        background-image: url("../../assets/noImg.jpg");
+      }
+    }
+
+    &-name {
+      padding: 15px 15px 5px 15px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    &-tagline {
+      font-size: 12px;
+      padding: 0 15px 20px 15px;
+    }
+
+    &-buttons {
+      display: flex;
+      padding-bottom: 20px;
+
+      a {
+        padding: 0 15px;
+        display: inline-block;
+        color: #1976d2;
+      }
+    }
+
+    .button {
+      width: 200px;
+      height: 40px;
+      text-align: center;
+      display: block;
+      margin: 0 auto;
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import { BASE_API_URL, API_KEY } from '../../globals';
+import { BASE_API_URL } from '../../globals';
 import axios from 'axios';
 
 const instance = axios.create({

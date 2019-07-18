@@ -2,6 +2,13 @@ import React, {Fragment} from 'react';
 import Preloader from "../../components/common/preloader/preloader";
 import PostItem from "../../components/postItem/postItem";
 import { apiPostBeerName } from './../../services/api/postsService';
+//import Search from '../../components/search/search';
+import {createStore} from 'redux';
+//import {Provider} from 'react-redux';
+//import reducers from "../../reducers";
+
+//const store = createStore(reducers);
+//store.subscribe(() => console.log('store', store.getState()));
 
 /**
  *
@@ -20,8 +27,6 @@ class MainPage extends React.Component {
             items: [],
             value: ''
         };
-        //this.handleChange = this.handleChange.bind(this);
-        //this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange = (event) => {
@@ -31,14 +36,12 @@ class MainPage extends React.Component {
     loadPosts() {
         apiPostBeerName(this.state.value)
             .then(response => {
-                console.log(response.data);
                 this.setState({
                     isLoaded: true,
                     items: response.data
                 });
             })
             .catch(error => {
-                //console.log(error);
                 this.setState({
                     isLoaded: true,
                     error
@@ -72,10 +75,10 @@ class MainPage extends React.Component {
         } else {
             return (
                 <Fragment>
-                    <div className="">
+                    <div className="search">
                         <form onSubmit={this.handleSubmit}>
-                            <input type="text" name="name" placeholder="Search beers..."  value={this.state.value} onChange={this.handleChange}/>
-                            <input type="submit" value="Отправить" />
+                            <input type="text" placeholder="Search beers..."  value={this.state.value} onChange={this.handleChange}/>
+                            <input type="submit" value="Send" />
                         </form>
                     </div>
 
@@ -86,6 +89,7 @@ class MainPage extends React.Component {
                                       image={item.image_url}
                                       name={item.name}
                                       tagline={item.tagline}
+                                      id={item.id}
                             />
                         ))}
                     </div>

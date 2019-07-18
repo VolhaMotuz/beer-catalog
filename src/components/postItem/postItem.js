@@ -1,8 +1,8 @@
 import React from 'react';
 import './postItem.scss';
+import { Link } from 'react-router-dom';
 
 class PostItem extends React.Component {
-
 
     render() {
         return (
@@ -18,9 +18,9 @@ class PostItem extends React.Component {
                     <div className="item-card-info">
                         <div className="item-card-name">{this.props.name}</div>
                         <div className="item-card-tagline">{this.props.tagline}</div>
-                        <div>
-                            <a className="button btn-fb" href="/">Open</a>
-                            <a className="button btn-fb" href="/">Favourites</a>
+                        <div className="item-card-buttons">
+                            <Link to={'/items/' + this.props.id}>Open</Link>
+                            <a className="" href="/">Favourite</a>
                         </div>
                     </div>
                 </div>
