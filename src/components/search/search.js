@@ -1,14 +1,22 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 
-class Search extends React.Component {
+class Search extends React.PureComponent {
+    // Set default props
+    static defaultProps = {
+        placeholder: "Search beers...",
+        buttonName: "Send"
+    };
+
+    handleChange = (event) => {
+      this.props.onChange(event.target.value);
+    };
+
     render() {
         return (
-            {/*<div className="search">
-                <form onSubmit={this.handleSubmit}>
-                    <input type="text" placeholder="Search beers..."  value={this.state.value} onChange={this.handleChange}/>
-                    <input type="submit" value="Send" />
-                </form>
-            </div>*/}
+            <div className="search">
+                <input type="text" placeholder={ this.props.placeholder } onChange={this.handleChange} value={this.props.value} />
+                <input type="submit" value={this.props.buttonName} onClick={this.props.onSubmit} />
+            </div>
         );
     }
 }

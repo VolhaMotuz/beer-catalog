@@ -1,14 +1,9 @@
 import React, {Fragment} from 'react';
 import Preloader from "../../components/common/preloader/preloader";
 import PostItem from "../../components/postItem/postItem";
-import { apiPostBeerName } from './../../services/api/postsService';
-//import Search from '../../components/search/search';
-import {createStore} from 'redux';
-//import {Provider} from 'react-redux';
-//import reducers from "../../reducers";
-
-//const store = createStore(reducers);
-//store.subscribe(() => console.log('store', store.getState()));
+import {connect} from "react-redux";
+import {loadBeer, setDefault} from "../../actions/search-actions";
+import SearchPanel from '../../components/search/search';
 
 /**
  *
@@ -23,42 +18,29 @@ class MainPage extends React.Component {
         super(props);
         this.state = {
             error: null,
-            isLoaded: false,
-            items: [],
             value: ''
         };
     }
 
-    handleChange = (event) => {
-        this.setState({value: event.target.value});
+    handleChange = (value) => {
+        this.setState({value: value});
     };
 
-    loadPosts() {
-        apiPostBeerName(this.state.value)
-            .then(response => {
-                this.setState({
-                    isLoaded: true,
-                    items: response.data
-                });
-            })
-            .catch(error => {
-                this.setState({
-                    isLoaded: true,
-                    error
-                });
-            });
-    }
-
-    handleSubmit = (event) => {
-        event.preventDefault();
-        this.loadPosts();
+    handleSubmit = () => {
+        this.props.loadBeer(this.state.value);
     };
 
     /**
      *
      */
     componentDidMount() {
-        this.loadPosts();
+        //if (this.props.items.length === 0) {
+            this.props.loadBeer();
+        //}
+    }
+
+    componentWillUnmount() {
+        //this.props.setDefault();
     }
 
     /**
@@ -66,7 +48,8 @@ class MainPage extends React.Component {
      * @returns {*}
      */
     render() {
-        const { error, isLoaded, items } = this.state;
+        const { error } = this.state;
+        const { isLoading: isLoaded, items } = this.props;
 
         if (error) {
             return <div>Error: {error.message}</div>;
@@ -75,13 +58,11 @@ class MainPage extends React.Component {
         } else {
             return (
                 <Fragment>
-                    <div className="search">
-                        <form onSubmit={this.handleSubmit}>
-                            <input type="text" placeholder="Search beers..."  value={this.state.value} onChange={this.handleChange}/>
-                            <input type="submit" value="Send" />
-                        </form>
-                    </div>
-
+                    <SearchPanel
+                        onChange={this.handleChange}
+                        onSubmit={this.handleSubmit}
+                        value={this.state.value}
+                    />
                     <div className="row">
 
                         {items.map(item => (
@@ -99,4 +80,14 @@ class MainPage extends React.Component {
     }
 }
 
-export default MainPage;
+function mapStateToProps (state) {
+    return {
+        items: state.searchState.beerList,
+        isLoading: !state.searchState.isLoading,
+    };
+}
+
+export default connect(mapStateToProps, {
+    loadBeer,
+    setDefault,
+})(MainPage);
