@@ -7,16 +7,20 @@ class Search extends React.PureComponent {
         buttonName: "Send"
     };
 
-    handleChange = (event) => {
+    handleChangeName = (event) => {
       this.props.onChange(event.target.value);
     };
 
     render() {
         return (
             <div className="search">
-                <input type="text" placeholder={ this.props.placeholder } onChange={this.handleChange} value={this.props.value} />
-                <input type="submit" value={this.props.buttonName} onClick={this.props.onSubmit} />
+                <div>
+                    <input type="text" placeholder={ this.props.placeholder } onChange={this.handleChangeName} value={this.props.value} />
+                    <input type="submit" value={this.props.buttonName} onClick={this.props.onSubmit} />
+                </div>
+
             </div>
+            
         );
     }
 }

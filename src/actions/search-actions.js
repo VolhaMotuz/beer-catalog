@@ -1,26 +1,17 @@
-import {LOAD_SEARCH, SET_BEER_LIST, SET_DEFAULT, SET_LOADING_STATE} from '../actions/action-types';
-import { apiPostBeerName } from './../services/api/postsService';
-
-export function loadSearch(searchType, title) {
-    return {
-        type: LOAD_SEARCH,
-        searchType,
-        title
-    };
-}
+import { SET_BEER_LIST, SET_DEFAULT, SET_LOADING_STATE} from '../actions/action-types';
+import { apiPostBeerList } from './../services/api/postsService';
 
 export function loadBeer(name=null) {
     // We return a function instead of an action object
     return (dispatch) => {
         dispatch(setLoading());
-        return apiPostBeerName(name)
+        return apiPostBeerList(name)
             .then(res => {
                 dispatch(setBeerList(res.data));
             })
             .finally(() => {
                 dispatch(setLoading(false));
-            })
-            ;
+            });
     };
 }
 

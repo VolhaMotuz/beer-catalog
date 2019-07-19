@@ -4,6 +4,10 @@ import PostItem from "../../components/postItem/postItem";
 import {connect} from "react-redux";
 import {loadBeer, setDefault} from "../../actions/search-actions";
 import SearchPanel from '../../components/search/search';
+//import FilterPanel from '../../components/filter/filter'
+import Slider from 'react-input-slider';
+import { apiPostBeerList } from '../../services/api/postsService';
+
 
 /**
  *
@@ -18,17 +22,28 @@ class MainPage extends React.Component {
         super(props);
         this.state = {
             error: null,
-            value: ''
+            valueName: '',
+            abv: 0,
+            ibu: 0,
+            ebc: 0
         };
     }
 
-    handleChange = (value) => {
-        this.setState({value: value});
+
+    handleChangeName = (value) => {
+        this.setState({valueName: value});
     };
 
     handleSubmit = () => {
-        this.props.loadBeer(this.state.value);
+        this.props.loadBeer(this.state.valueName);
     };
+
+    getNewBeerlist = () => {
+        console.log(this.state.abv);
+        apiPostBeerList(this.state.abv).then(res => {
+            console.log(res.data);
+        })
+    }
 
     /**
      *
@@ -59,12 +74,49 @@ class MainPage extends React.Component {
             return (
                 <Fragment>
                     <SearchPanel
-                        onChange={this.handleChange}
+                        onChange={this.handleChangeName}
                         onSubmit={this.handleSubmit}
-                        value={this.state.value}
+                        value={this.state.valueName}
                     />
-                    <div className="row">
 
+                    <div className="filter">
+                        <div>
+                            <div>{'Alcohol by Volume: ' + this.state.abv}</div>
+                            <Slider
+                                axis="x"
+                                xstep={0.1}
+                                xmin={0}
+                                xmax={5}
+                                x={this.state.abv}
+                                onChange={({ x }) => this.setState({ abv: parseFloat(x.toFixed(2)) })}
+                                onDragEnd={this.getNewBeerlist}
+                            />
+                        </div>
+                        <div>
+                            <div>{'International Bitterness Units: ' + this.state.ibu}</div>
+                            <Slider
+                                axis="x"
+                                xstep={1}
+                                xmin={0}
+                                xmax={200}
+                                x={this.state.ibu}
+                                onChange={({ x }) => this.setState({ ibu: parseFloat(x.toFixed(2)) })}
+                            />
+                        </div>
+                        <div>
+                            <div>{'Color by EBC: ' + this.state.ebc}</div>
+                            <Slider
+                                axis="x"
+                                xstep={0.1}
+                                xmin={0}
+                                xmax={10}
+                                x={this.state.ebc}
+                                onChange={({ x }) => this.setState({ ebc: parseFloat(x.toFixed(2)) })}
+                            />
+                        </div>
+                    </div>
+
+                    <div className="row">
                         {items.map(item => (
                             <PostItem key={item.id}
                                       image={item.image_url}
