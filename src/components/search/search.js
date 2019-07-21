@@ -18,9 +18,7 @@ class Search extends React.PureComponent {
                     <input type="text" placeholder={ this.props.placeholder } onChange={this.handleChangeName} value={this.props.value} />
                     <input type="submit" value={this.props.buttonName} onClick={this.props.onSubmit} />
                 </div>
-
             </div>
-            
         );
     }
 }

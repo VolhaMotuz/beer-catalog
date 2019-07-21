@@ -2,6 +2,7 @@ import React, {Fragment} from 'react';
 import Preloader from "../../components/common/preloader/preloader";
 import { apiGetBeerItem } from './../../services/api/postsService';
 import './itemPage.scss'
+import IngredientItem from "./child/ingredientItem";
 
 class ItemPage extends React.Component {
 
@@ -30,6 +31,22 @@ class ItemPage extends React.Component {
                 });
             });
     }
+
+    /*renderIngredients(ingredients) {
+        if (!ingredients) {
+            return '';
+        }
+        const result = [];
+        for (let key in ingredients) {
+            console.log(key, ingredients[key]);
+
+            ingredients[key].forEach(function (item) {
+               result.push(<IngredientItem title={item.name} value={item.value} /> );
+            });
+        }
+
+        return result;
+    }*/
 
     render() {
         const { error, isLoaded, data } = this.state;
@@ -102,14 +119,6 @@ class ItemPage extends React.Component {
                             <table  className="product-properties">
 
                                 <tbody>
-
-                                {Object.keys(item.ingredients).map((prorerty, index) => (
-                                    <tr key={ index }>
-                                        <td>
-                                            <div>{ prorerty }</div>
-                                        </td>
-                                    </tr>
-                                ))}
 
                                 </tbody>
                             </table>

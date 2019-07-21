@@ -1,19 +1,19 @@
 import httpClient from './httpClient';
 
-export function apiPostBeerList(name, abv, ibu, ebc) {
+export function apiPostBeerList(filterParams = {}) {
     let params = {};
 
-    if (name) {
-        params.beer_name = name;
+    if (filterParams.name) {
+        params.beer_name = filterParams.name;
     }
-    if (abv) {
-        params.abv = abv;
+    if (filterParams.abv) {
+        params.abv_lt = filterParams.abv;
     }
-    if (ibu) {
-        params.ibu = ibu;
+    if (filterParams.ibu) {
+        params.ibu_lt = filterParams.ibu;
     }
-    if (ebc) {
-        params.ebc = ebc;
+    if (filterParams.ebc) {
+        params.ebc_lt = filterParams.ebc;
     }
 
     return httpClient.get('/beers',{

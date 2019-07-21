@@ -1,11 +1,11 @@
 import { SET_BEER_LIST, SET_DEFAULT, SET_LOADING_STATE} from '../actions/action-types';
 import { apiPostBeerList } from './../services/api/postsService';
 
-export function loadBeer(name=null) {
+export function loadBeer(filterParams = {}) {
     // We return a function instead of an action object
     return (dispatch) => {
         dispatch(setLoading());
-        return apiPostBeerList(name)
+        return apiPostBeerList(filterParams)
             .then(res => {
                 dispatch(setBeerList(res.data));
             })

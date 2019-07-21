@@ -2,14 +2,8 @@ import React from 'react';
 import Slider from 'react-input-slider';
 
 class Filter extends React.PureComponent {
-    // Set default props
-    static defaultProps = {
-        placeholder: "Search beers...",
-        buttonName: "Send"
-    };
-
-    handleChangeName = (event) => {
-        this.props.onChange(event.target.value);
+    handleChange = (attrName, value) => {
+        this.props.onValueChange(attrName, value);
     };
 
     render() {
@@ -23,7 +17,8 @@ class Filter extends React.PureComponent {
                         xmin={0}
                         xmax={5}
                         x={this.props.abv}
-                        onChange={({ x }) => this.setState({ abv: parseFloat(x.toFixed(2)) })}
+                        //onChange={({ x }) => this.setState({ abv: parseFloat(x.toFixed(2)) })}
+                        onChange={({ x }) => this.handleChange('abv', parseFloat(x.toFixed(2)) )}
                     />
                 </div>
                 <div>
@@ -34,7 +29,7 @@ class Filter extends React.PureComponent {
                         xmin={0}
                         xmax={200}
                         x={this.props.ibu}
-                        onChange={({ x }) => this.setState({ ibu: parseFloat(x.toFixed(2)) })}
+                        onChange={({ x }) => this.handleChange('ibu', parseFloat(x.toFixed(2)) )}
                     />
                 </div>
                 <div>
@@ -45,7 +40,7 @@ class Filter extends React.PureComponent {
                         xmin={0}
                         xmax={10}
                         x={this.props.ebc}
-                        onChange={({ x }) => this.setState({ ebc: parseFloat(x.toFixed(2)) })}
+                        onChange={({ x }) => this.handleChange('ebc', parseFloat(x.toFixed(2)) )}
                     />
                 </div>
             </div>
