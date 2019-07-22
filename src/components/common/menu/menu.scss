@@ -71,5 +71,18 @@
         }
       }
     }
+
+    &_navigation {
+
+      ul {
+        padding-top: 20px;
+        li {
+          padding: 5px 15px;
+          a {
+            color: #1976d2;
+          }
+        }
+      }
+    }
   }
 }

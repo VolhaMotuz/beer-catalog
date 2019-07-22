@@ -5,9 +5,6 @@ import {connect} from "react-redux";
 import {loadBeer, setDefault} from "../../actions/search-actions";
 import SearchPanel from '../../components/search/search';
 import FilterPanel from '../../components/filter/filter'
-import Slider from 'react-input-slider';
-import { apiPostBeerList } from '../../services/api/postsService';
-
 
 /**
  *
@@ -111,6 +108,7 @@ class MainPage extends React.Component {
                         onChange={this.handleChangeName}
                         onSubmit={this.handleSubmit}
                         value={filter.name}
+                        buttonName=""
                     />
                     <FilterPanel
                         abv = {filter.abv}

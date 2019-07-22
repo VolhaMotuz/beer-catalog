@@ -1,7 +1,8 @@
 import React from 'react';
+import './search.scss';
 
 class Search extends React.PureComponent {
-    // Set default props
+
     static defaultProps = {
         placeholder: "Search beers...",
         buttonName: "Send"
@@ -14,10 +15,8 @@ class Search extends React.PureComponent {
     render() {
         return (
             <div className="search">
-                <div>
-                    <input type="text" placeholder={ this.props.placeholder } onChange={this.handleChangeName} value={this.props.value} />
-                    <input type="submit" value={this.props.buttonName} onClick={this.props.onSubmit} />
-                </div>
+                <input type="text" placeholder={ this.props.placeholder } onChange={this.handleChangeName} value={this.props.value} />
+                <input type="submit" value={this.props.buttonName} onClick={this.props.onSubmit} />
             </div>
         );
     }

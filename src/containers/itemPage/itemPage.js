@@ -32,22 +32,6 @@ class ItemPage extends React.Component {
             });
     }
 
-    /*renderIngredients(ingredients) {
-        if (!ingredients) {
-            return '';
-        }
-        const result = [];
-        for (let key in ingredients) {
-            console.log(key, ingredients[key]);
-
-            ingredients[key].forEach(function (item) {
-               result.push(<IngredientItem title={item.name} value={item.value} /> );
-            });
-        }
-
-        return result;
-    }*/
-
     render() {
         const { error, isLoaded, data } = this.state;
         const item = data[0];
@@ -62,7 +46,7 @@ class ItemPage extends React.Component {
                         <div className="column col--xs-12 col--md-6 col--lg-8">
                             <div className="product-name">{item.name}</div>
                             <div className="product-tagline">{item.tagline}</div>
-                            <a href="/" className="button btn-fb">Add to favourites</a>
+                            {/*<a href="/" className="button btn-fb">Add to favourites</a>*/}
                             <div className="product-description">{item.description}</div>
                         </div>
                         <div className="column col--xs-12 col--md-6 col--lg-4">
@@ -116,18 +100,70 @@ class ItemPage extends React.Component {
                     <div className="row product-row">
                         <div className="column col--xs-12 col--md-6 col--lg-3">
                             <div className="product-title">Ingredients</div>
-                            <table  className="product-properties">
+                            <table className="product-properties">
 
                                 <tbody>
-
+                                { item.ingredients.hops.length > 0 &&
+                                <tr>
+                                    <td>
+                                        <div className="title">Hops</div>
+                                        {item.ingredients.hops.map((item, index) => (
+                                            <div key={index}>
+                                                <span className="details">"{item.name}" - {item.amount.value} {item.amount.unit}, add when {item.add}</span>
+                                            </div>
+                                        ))}
+                                    </td>
+                                </tr>
+                                }
+                                { item.ingredients.malt.length > 0 &&
+                                <tr>
+                                    <td>
+                                        <div className="title">Malt</div>
+                                        {item.ingredients.malt.map((item, index) => (
+                                            <div key={index}>
+                                                <span className="details">"{item.name}" - {item.amount.value} {item.amount.unit}, add when {item.add}</span>
+                                            </div>
+                                        ))}
+                                    </td>
+                                </tr>
+                                }
+                                { item.ingredients.yeast.length > 0 &&
+                                <tr>
+                                    <td>
+                                        <div className="title">Yeast</div>
+                                        <span className="details">{ item.ingredients.yeast }</span>
+                                    </td>
+                                </tr>
+                                }
                                 </tbody>
                             </table>
                         </div>
                         <div className="column col--xs-12 col--md-6 col--lg-3">
                             <div className="product-title">Method</div>
-                            <ul>
-                                <li></li>
-                            </ul>
+                            <div className="product-properties">
+                                { item.method.mash_temp.length > 0 &&
+                                <div className="product-properties-method">
+                                    <div className="title">Mash</div>
+                                    {item.method.mash_temp.map((item, index) => (
+                                        <div key={index}>
+                                            <span className="details">{item.duration} minutes {item.temp.value} {item.temp.unit}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                                }
+                                { item.method.fermentation &&
+                                <div className="product-properties-method">
+                                    <div className="title">Fermentation</div>
+                                    <span className="details">Perform at {item.method.fermentation.temp.value} {item.method.fermentation.temp.unit}</span>
+                                </div>
+                                }
+                                { item.method.twist &&
+                                <div className="product-properties-method">
+                                    <div className="title">Twist</div>
+                                    <span className="details">{item.method.twist}</span>
+                                </div>
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>

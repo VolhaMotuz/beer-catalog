@@ -34,8 +34,8 @@ class Menu extends React.Component {
                     </div>
                     <div className="menu__content_navigation">
                         <ul>
-                            <li><Link to="/">Home</Link></li>
-                            <li><Link to="/favourites">Favourites</Link></li>
+                            <li onClick={this.toggleMenu}><Link to="/">Home</Link></li>
+                            {/*<li><Link to="/favourites">Favourites</Link></li>*/}
                         </ul>
                     </div>
                 </div>

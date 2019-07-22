@@ -20,7 +20,7 @@ class PostItem extends React.Component {
                         <div className="item-card-tagline">{this.props.tagline}</div>
                         <div className="item-card-buttons">
                             <Link to={'/items/' + this.props.id}>Open</Link>
-                            <a className="" href="/">Favourite</a>
+                            {/*<a className="" href="/">Favourite</a>*/}
                         </div>
                     </div>
                 </div>
