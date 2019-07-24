@@ -1,6 +1,7 @@
 import React from 'react';
 import Slider from 'react-input-slider';
 import './filter.scss';
+import FilterItem from "./filterItem";
 
 class Filter extends React.PureComponent {
 
@@ -21,7 +22,15 @@ class Filter extends React.PureComponent {
     render() {
         return (
             <div className="filter">
-                <div className="filter-item">
+                <FilterItem title={'Alcohol by Volume:'}
+                            currentValue={this.props.abv}
+                            axis={'x'}
+                            xstep={0.1}
+                            xmax={5}
+                            x={this.props.abv}
+                            onChange={({ x }) => this.getParams('abv', parseFloat(x.toFixed(2)))}
+                            onDragEnd={this.handleChange} />
+                {/*<div className="filter-item">
                     <div className="filter-item_title">Alcohol by Volume: </div>
                     <div className="filter-item_content">
                         <span>{this.props.abv}</span>
@@ -35,8 +44,8 @@ class Filter extends React.PureComponent {
                             onDragEnd={this.handleChange}
                         />
                     </div>
-                </div>
-                <div className="filter-item">
+                </div>*/}
+                {/*<div className="filter-item">
                     <div className="filter-item_title">International Bitterness Units: </div>
                     <div className="filter-item_content">
                         <span>{this.props.ibu}</span>
@@ -50,9 +59,8 @@ class Filter extends React.PureComponent {
                             onDragEnd={this.handleChange}
                         />
                     </div>
-
-                </div>
-                <div className="filter-item">
+                </div>*/}
+                {/*<div className="filter-item">
                     <div className="filter-item_title">Color by EBC: </div>
                     <div className="filter-item_content">
                         <span>{this.props.ebc}</span>
@@ -66,7 +74,7 @@ class Filter extends React.PureComponent {
                             onDragEnd={this.handleChange}
                         />
                     </div>
-                </div>
+                </div>*/}
             </div>
         );
     }

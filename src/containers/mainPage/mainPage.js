@@ -41,6 +41,12 @@ class MainPage extends React.Component {
         this.props.loadBeer(this.state.filter);
     };
 
+    handleKeyPress = (target) => {
+        if(target.charCode==13){
+            this.props.loadBeer(this.state.filter);
+        }
+    };
+
     /**
      *
      */
@@ -107,6 +113,7 @@ class MainPage extends React.Component {
                     <SearchPanel
                         onChange={this.handleChangeName}
                         onSubmit={this.handleSubmit}
+                        onKeyPress={this.handleKeyPress}
                         value={filter.name}
                         buttonName=""
                     />

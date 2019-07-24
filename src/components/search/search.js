@@ -15,7 +15,7 @@ class Search extends React.PureComponent {
     render() {
         return (
             <div className="search">
-                <input type="text" placeholder={ this.props.placeholder } onChange={this.handleChangeName} value={this.props.value} />
+                <input type="text" placeholder={ this.props.placeholder } onChange={this.handleChangeName} onKeyPress={this.props.onKeyPress} value={this.props.value} />
                 <input type="submit" value={this.props.buttonName} onClick={this.props.onSubmit} />
             </div>
         );

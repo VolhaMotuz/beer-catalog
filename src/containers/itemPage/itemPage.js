@@ -1,8 +1,11 @@
 import React, {Fragment} from 'react';
 import Preloader from "../../components/common/preloader/preloader";
 import { apiGetBeerItem } from './../../services/api/postsService';
-import './itemPage.scss'
-import IngredientItem from "./child/ingredientItem";
+import IngredientItem from "../../components/childItemPage/ingredientItem";
+import MethodsItem from "../../components/childItemPage/MethodsItem";
+import FoodPairingItem from "../../components/childItemPage/foodPairingItem";
+import PropertiesItem from "../../components/childItemPage/propertiesItem";
+import './itemPage.scss';
 
 class ItemPage extends React.Component {
 
@@ -59,35 +62,10 @@ class ItemPage extends React.Component {
                     </div>
                     <div className="row product-row">
                         <div className="column col--xs-12 col--md-6 col--lg-4">
-                            <div className="product-title">Properties</div>
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <td>ABV</td>
-                                        <td>{ item.abv }</td>
-                                    </tr>
-                                    <tr>
-                                        <td>EBC</td>
-                                        <td>{ item.ebc }</td>
-                                    </tr>
-                                    <tr>
-                                        <td>IBU</td>
-                                        <td>{ item.ibu }</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <PropertiesItem itemObj={item} />
                         </div>
                         <div className="column col--xs-12 col--md-6 col--lg-4">
-                            <div className="product-title">Food Pairing</div>
-                            <table>
-                                <tbody>
-                                    { item.food_pairing.map(item => (
-                                        <tr key={ item }>
-                                            <td>{ item }</td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+                            <FoodPairingItem foodPairingObj={item.food_pairing} />
                         </div>
                     </div>
                     <div className="row product-row">
@@ -99,71 +77,10 @@ class ItemPage extends React.Component {
 
                     <div className="row product-row">
                         <div className="column col--xs-12 col--md-6 col--lg-3">
-                            <div className="product-title">Ingredients</div>
-                            <table className="product-properties">
-
-                                <tbody>
-                                { item.ingredients.hops.length > 0 &&
-                                <tr>
-                                    <td>
-                                        <div className="title">Hops</div>
-                                        {item.ingredients.hops.map((item, index) => (
-                                            <div key={index}>
-                                                <span className="details">"{item.name}" - {item.amount.value} {item.amount.unit}, add when {item.add}</span>
-                                            </div>
-                                        ))}
-                                    </td>
-                                </tr>
-                                }
-                                { item.ingredients.malt.length > 0 &&
-                                <tr>
-                                    <td>
-                                        <div className="title">Malt</div>
-                                        {item.ingredients.malt.map((item, index) => (
-                                            <div key={index}>
-                                                <span className="details">"{item.name}" - {item.amount.value} {item.amount.unit}, add when {item.add}</span>
-                                            </div>
-                                        ))}
-                                    </td>
-                                </tr>
-                                }
-                                { item.ingredients.yeast.length > 0 &&
-                                <tr>
-                                    <td>
-                                        <div className="title">Yeast</div>
-                                        <span className="details">{ item.ingredients.yeast }</span>
-                                    </td>
-                                </tr>
-                                }
-                                </tbody>
-                            </table>
+                            <IngredientItem ingredientsObj={item.ingredients} />
                         </div>
                         <div className="column col--xs-12 col--md-6 col--lg-3">
-                            <div className="product-title">Method</div>
-                            <div className="product-properties">
-                                { item.method.mash_temp.length > 0 &&
-                                <div className="product-properties-method">
-                                    <div className="title">Mash</div>
-                                    {item.method.mash_temp.map((item, index) => (
-                                        <div key={index}>
-                                            <span className="details">{item.duration} minutes {item.temp.value} {item.temp.unit}</span>
-                                        </div>
-                                    ))}
-                                </div>
-                                }
-                                { item.method.fermentation &&
-                                <div className="product-properties-method">
-                                    <div className="title">Fermentation</div>
-                                    <span className="details">Perform at {item.method.fermentation.temp.value} {item.method.fermentation.temp.unit}</span>
-                                </div>
-                                }
-                                { item.method.twist &&
-                                <div className="product-properties-method">
-                                    <div className="title">Twist</div>
-                                    <span className="details">{item.method.twist}</span>
-                                </div>
-                                }
-                            </div>
+                            <MethodsItem methodsObj={item.method} />
                         </div>
                     </div>
                 </div>
