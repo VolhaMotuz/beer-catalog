@@ -1,13 +1,12 @@
 import React from 'react';
 import './pageNotFound.scss';
 
-class PageNotFound extends React.Component {
-    render() {
+export default function PageNotFound() {
 
-        return (
-            <div>404</div>
-        );
-    }
+    return (
+        <div className="nf-page">
+            <div className="nf-page_error-code">404</div>
+            <p className="nf-page_description">Page Not Found</p>
+        </div>
+    );
 }
-
-export default PageNotFound;

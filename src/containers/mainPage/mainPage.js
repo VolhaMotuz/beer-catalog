@@ -1,10 +1,10 @@
 import React, {Fragment} from 'react';
 import Preloader from "../../components/common/preloader/preloader";
 import PostItem from "../../components/postItem/postItem";
-import {connect} from "react-redux";
-import {loadBeer, setDefault} from "../../actions/search-actions";
+import { connect } from "react-redux";
+import { loadBeer, setDefault } from "../../actions/search-actions";
 import SearchPanel from '../../components/search/search';
-import FilterPanel from '../../components/filter/filter'
+import FilterPanel from '../../components/filter/filter';
 
 /**
  *
@@ -42,7 +42,7 @@ class MainPage extends React.Component {
     };
 
     handleKeyPress = (target) => {
-        if(target.charCode==13){
+        if (target.charCode === 13) {
             this.props.loadBeer(this.state.filter);
         }
     };

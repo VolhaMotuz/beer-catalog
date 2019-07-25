@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { COMPANY_NAME, EMAIL, ADDRESS, PHONE } from "./globals";
 import Header from './components/common/header/header';
 import Footer from './components/common/footer/footer';
 import ErrorBoundary from "./components/common/errorBoundary/errorBoundary";
@@ -14,7 +15,7 @@ class App extends React.Component {
     return (
         <Router>
           <div className="wrapper">
-            <Header />
+            <Header title={COMPANY_NAME} />
             <div className="container grid--container content">
               <ErrorBoundary>
                 <Switch>
@@ -25,7 +26,11 @@ class App extends React.Component {
                 </Switch>
               </ErrorBoundary>
             </div>
-            <Footer />
+            <Footer
+                address={ADDRESS}
+                phone={PHONE}
+                email={EMAIL}
+            />
           </div>
         </Router>
     );
@@ -33,4 +38,3 @@ class App extends React.Component {
 }
 
 export default App;
-

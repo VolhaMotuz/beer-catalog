@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './menu.scss';
 
-class Menu extends React.Component {
+export default class Menu extends React.Component {
     constructor(props) {
         super(props);
         this.state = {isToggleMenuOn: false};
@@ -13,7 +13,6 @@ class Menu extends React.Component {
         this.setState(state => ({
             isToggleMenuOn: !state.isToggleMenuOn
         }));
-        console.log(this.state.isToggleMenuOn);
     }
 
     render() {
@@ -26,7 +25,7 @@ class Menu extends React.Component {
                 </div>
                 <div className={"menu__content " + (this.state.isToggleMenuOn ? 'show' : 'hidden')}>
                     <div className="menu__content_header">
-                        <div>Beer catalog</div>
+                        <div>{this.props.title}</div>
                         <div className="button-close" onClick={this.toggleMenu}>
                             <span></span>
                             <span></span>
@@ -43,5 +42,3 @@ class Menu extends React.Component {
         );
     }
 }
-
-export default Menu;

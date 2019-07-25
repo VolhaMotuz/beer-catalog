@@ -1,13 +1,14 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 import Preloader from "../../components/common/preloader/preloader";
 import { apiGetBeerItem } from './../../services/api/postsService';
 import IngredientItem from "../../components/childItemPage/ingredientItem";
 import MethodsItem from "../../components/childItemPage/MethodsItem";
 import FoodPairingItem from "../../components/childItemPage/foodPairingItem";
 import PropertiesItem from "../../components/childItemPage/propertiesItem";
+import ImageItem from "../../components/childItemPage/imageItem";
 import './itemPage.scss';
 
-class ItemPage extends React.Component {
+export default class ItemPage extends React.Component {
 
     constructor(props) {
         super(props);
@@ -21,7 +22,6 @@ class ItemPage extends React.Component {
     componentDidMount() {
         apiGetBeerItem( this.props.match.params.id)
             .then(response => {
-                console.log(response.data);
                 this.setState({
                     isLoaded: true,
                     data: response.data,
@@ -53,11 +53,7 @@ class ItemPage extends React.Component {
                             <div className="product-description">{item.description}</div>
                         </div>
                         <div className="column col--xs-12 col--md-6 col--lg-4">
-                            { item.image_url ? (
-                                <div className="product-image" style={{backgroundImage: 'url('+ item.image_url + ')'}}></div>
-                            ) : (
-                                <div className="product-image no-photo"></div>
-                            )}
+                            <ImageItem image_url={item.image_url} />
                         </div>
                     </div>
                     <div className="row product-row">
@@ -74,7 +70,6 @@ class ItemPage extends React.Component {
                             <div>{ item.brewers_tips }</div>
                         </div>
                     </div>
-
                     <div className="row product-row">
                         <div className="column col--xs-12 col--md-6 col--lg-3">
                             <IngredientItem ingredientsObj={item.ingredients} />
@@ -88,5 +83,3 @@ class ItemPage extends React.Component {
         }
     }
 }
-
-export default ItemPage;

@@ -1,7 +1,7 @@
 import React from 'react';
 import './search.scss';
 
-class Search extends React.PureComponent {
+export default class Search extends React.PureComponent {
 
     static defaultProps = {
         placeholder: "Search beers...",
@@ -21,5 +21,3 @@ class Search extends React.PureComponent {
         );
     }
 }
-
-export default Search;
