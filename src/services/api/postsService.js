@@ -15,6 +15,12 @@ export function apiPostBeerList(filterParams = {}) {
     if (filterParams.ebc) {
         params.ebc_lt = filterParams.ebc;
     }
+    if (filterParams.pageNumber) {
+        params.page = filterParams.pageNumber;
+    }
+    if (filterParams.pageAmount) {
+        params.per_page = filterParams.pageAmount;
+    }
 
     return httpClient.get('/beers',{
         params: params,

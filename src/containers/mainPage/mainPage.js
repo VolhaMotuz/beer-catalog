@@ -1,20 +1,15 @@
 import React, {Fragment} from 'react';
+import InfiniteScroll from 'react-infinite-scroller';
 import Preloader from "../../components/common/preloader/preloader";
 import PostItem from "../../components/postItem/postItem";
 import { connect } from "react-redux";
 import { loadBeer, setDefault } from "../../actions/search-actions";
 import SearchPanel from '../../components/search/search';
 import FilterPanel from '../../components/filter/filter';
+import apiPostBeerPage from './../../services/api/postsService';
 
-/**
- *
- */
 class MainPage extends React.Component {
 
-    /**
-     *
-     * @param props
-     */
     constructor(props) {
         super(props);
         this.state = {
@@ -23,7 +18,9 @@ class MainPage extends React.Component {
                 name: '',
                 abv: 0,
                 ibu: 0,
-                ebc: 0
+                ebc: 0,
+                pageNumber: 0,
+                pageAmount: 25
             },
         };
     }
@@ -47,9 +44,6 @@ class MainPage extends React.Component {
         }
     };
 
-    /**
-     *
-     */
     componentDidMount() {
         //if (this.props.items.length === 0) {
             this.props.loadBeer();
@@ -72,19 +66,12 @@ class MainPage extends React.Component {
         if (prevState.filter.ibu !== ibu) {
             return true;
         }
-
         if (prevState.filter.ebc !== ebc) {
             return true;
         }
-
         return prevState.filter.abv !== abv;
     }
 
-    /**
-     *
-     * @param attrName
-     * @param value
-     */
     handleFilterValueChange = (attrName, value) => {
         this.setState((prevState) => {
             return  {
@@ -94,6 +81,10 @@ class MainPage extends React.Component {
                 }}
         });
     };
+
+    handlePageLoader() {
+        this.props.loadBeer();
+    }
 
     /**
      *
@@ -118,12 +109,18 @@ class MainPage extends React.Component {
                         buttonName=""
                     />
                     <FilterPanel
-                        abv = {filter.abv}
-                        ibu = {filter.ibu}
-                        ebc = {filter.ebc}
+                        abv={filter.abv}
+                        ibu={filter.ibu}
+                        ebc={filter.ebc}
                         onValueChange={ this.handleFilterValueChange }
                     />
-                    <div className="row">
+                    <InfiniteScroll
+                        className="row"
+                        pageStart={0}
+                        loadMore={this.handlePageLoader}
+                        hasMore={true || false}
+                        loader={<div className="loader" key={0}>Loading ...</div>}
+                    >
                         {items.map(item => (
                             <PostItem key={item.id}
                                       image={item.image_url}
@@ -132,7 +129,7 @@ class MainPage extends React.Component {
                                       id={item.id}
                             />
                         ))}
-                    </div>
+                    </InfiniteScroll>
                 </Fragment>
             );
         }
