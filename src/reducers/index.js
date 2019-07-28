@@ -1,8 +1,12 @@
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
+import commonReducer from './common-reducer';
 import searchReducer from './search-reducer';
+import itemReducer from './item-reducer';
 
 const reducers = combineReducers({
-    searchState: searchReducer
+    commonState: commonReducer,
+    searchState: searchReducer,
+    itemState: itemReducer
 });
 
 export default reducers;

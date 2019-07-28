@@ -1,10 +1,9 @@
-import {LOAD_SEARCH, SET_BEER_LIST, SET_DEFAULT, SET_LOADING_STATE} from "../actions/action-types";
+import { LOAD_SEARCH, SET_BEER_LIST, SET_DEFAULT } from "../actions/action-types";
 
 const initialState = {
     searchType: '',
     title: '',
-    beerList: [],
-    isLoading: true,
+    beerList: []
 };
 
 const searchReducer = function(state = initialState, action) {
@@ -21,12 +20,6 @@ const searchReducer = function(state = initialState, action) {
             return {
                 ...state,
                 beerList: action.payload,
-            };
-
-        case SET_LOADING_STATE:
-            return  {
-                ...state,
-                isLoading: action.payload,
             };
 
         case SET_DEFAULT:

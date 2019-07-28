@@ -1,12 +1,12 @@
 import React, {Fragment} from 'react';
-import InfiniteScroll from 'react-infinite-scroller';
+// import InfiniteScroll from 'react-infinite-scroller';
 import Preloader from "../../components/common/preloader/preloader";
 import PostItem from "../../components/postItem/postItem";
 import { connect } from "react-redux";
 import { loadBeer, setDefault } from "../../actions/search-actions";
 import SearchPanel from '../../components/search/search';
 import FilterPanel from '../../components/filter/filter';
-import apiPostBeerPage from './../../services/api/postsService';
+// import withDataLoading from "../../HOC/dataLoading";
 
 class MainPage extends React.Component {
 
@@ -92,11 +92,11 @@ class MainPage extends React.Component {
      */
     render() {
         const { error, filter } = this.state;
-        const { isLoading: isLoaded, items } = this.props;
-
+        const { isLoading, items } = this.props;
+console.log(this.props);
         if (error) {
             return <div>Error: {error.message}</div>;
-        } else if (!isLoaded) {
+        } else if (isLoading) {
             return <Preloader />;
         } else {
             return (
@@ -114,13 +114,13 @@ class MainPage extends React.Component {
                         ebc={filter.ebc}
                         onValueChange={ this.handleFilterValueChange }
                     />
-                    <InfiniteScroll
+                    {/*<InfiniteScroll
                         className="row"
                         pageStart={0}
                         loadMore={this.handlePageLoader}
                         hasMore={true || false}
                         loader={<div className="loader" key={0}>Loading ...</div>}
-                    >
+                    >*/}
                         {items.map(item => (
                             <PostItem key={item.id}
                                       image={item.image_url}
@@ -129,7 +129,7 @@ class MainPage extends React.Component {
                                       id={item.id}
                             />
                         ))}
-                    </InfiniteScroll>
+                    {/*</InfiniteScroll>*/}
                 </Fragment>
             );
         }
@@ -139,7 +139,7 @@ class MainPage extends React.Component {
 function mapStateToProps (state) {
     return {
         items: state.searchState.beerList,
-        isLoading: !state.searchState.isLoading,
+        isLoading: state.commonState.isLoading,
     };
 }
 
@@ -147,3 +147,10 @@ export default connect(mapStateToProps, {
     loadBeer,
     setDefault,
 })(MainPage);
+
+/*
+export default connect(mapStateToProps, {
+    loadBeer,
+    setDefault,
+})(withDataLoading(MainPage));
+*/

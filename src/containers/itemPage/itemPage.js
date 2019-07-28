@@ -1,46 +1,34 @@
 import React from 'react';
 import Preloader from "../../components/common/preloader/preloader";
-import { apiGetBeerItem } from './../../services/api/postsService';
 import IngredientItem from "../../components/childItemPage/ingredientItem";
 import MethodsItem from "../../components/childItemPage/MethodsItem";
 import FoodPairingItem from "../../components/childItemPage/foodPairingItem";
 import PropertiesItem from "../../components/childItemPage/propertiesItem";
 import ImageItem from "../../components/childItemPage/imageItem";
+import withDataLoading from '../../HOC/dataLoading';
+import { connect } from "react-redux";
+import { loadBeerItem } from "../../actions/item-action";
 import './itemPage.scss';
 
-export default class ItemPage extends React.Component {
+class ItemPage extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            error: null,
-            isLoaded: false,
-            data: [],
+            error: null
         };
     }
 
     componentDidMount() {
-        apiGetBeerItem( this.props.match.params.id)
-            .then(response => {
-                this.setState({
-                    isLoaded: true,
-                    data: response.data,
-                });
-            })
-            .catch(error => {
-                this.setState({
-                    isLoaded: true,
-                    error
-                });
-            });
+        this.props.loadBeerItem(this.props.match.params.id);
     }
 
     render() {
-        const { error, isLoaded, data } = this.state;
+        const { error, isLoading, data } = this.props;
         const item = data[0];
         if (error) {
             return <div>Error: { error.message }</div>;
-        } else if (!isLoaded) {
+        } else if (isLoading) {
             return <Preloader />;
         } else {
             return (
@@ -83,3 +71,14 @@ export default class ItemPage extends React.Component {
         }
     }
 }
+
+function mapStateToProps (state) {
+    return {
+        data: state.itemState.beerItem,
+        isLoading: state.itemState.isLoading,
+    };
+}
+
+export default connect(mapStateToProps, {
+    loadBeerItem
+})(withDataLoading(ItemPage));

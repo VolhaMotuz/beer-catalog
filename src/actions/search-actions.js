@@ -1,5 +1,6 @@
-import { SET_BEER_LIST, SET_DEFAULT, SET_LOADING_STATE } from '../actions/action-types';
+import { SET_BEER_LIST, SET_DEFAULT } from '../actions/action-types';
 import { apiPostBeerList } from './../services/api/postsService';
+import { setLoading } from "./common-actions";
 
 export function loadBeer(filterParams = {}) {
     return (dispatch) => {
@@ -24,13 +25,6 @@ export function setBeerList(data) {
     return {
         type: SET_BEER_LIST,
         payload: data,
-    };
-}
-
-export function setLoading(isLoading = true) {
-    return {
-        type: SET_LOADING_STATE,
-        payload: isLoading,
     };
 }
 

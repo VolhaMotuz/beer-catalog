@@ -1,16 +1,14 @@
 import React from 'react';
 import Preloader from "../components/common/preloader/preloader";
 
-function loadData(Component) {
+export default function withLoadData(Component) {
     return class loadData extends React.Component {
-        state = { hovering: false }
-        mouseOver = () => this.setState({ hovering: true })
-        mouseOut = () => this.setState({ hovering: false })
-        render() {
+        isLoading(prop) {
+            return !prop || prop.isLoading;
+        }
 
-            return (
-                <div></div>
-            );
+        render() {
+            return  <Component {...this.props} />;
         }
     }
 }
