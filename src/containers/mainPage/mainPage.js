@@ -1,12 +1,10 @@
 import React, {Fragment} from 'react';
 // import InfiniteScroll from 'react-infinite-scroller';
-import Preloader from "../../components/common/preloader/preloader";
-import PostItem from "../../components/postItem/postItem";
 import { connect } from "react-redux";
 import { loadBeer, setDefault } from "../../actions/search-actions";
 import SearchPanel from '../../components/search/search';
 import FilterPanel from '../../components/filter/filter';
-// import withDataLoading from "../../HOC/dataLoading";
+import ListBeer from "../../components/listBeer/listBeer";
 
 class MainPage extends React.Component {
 
@@ -93,11 +91,9 @@ class MainPage extends React.Component {
     render() {
         const { error, filter } = this.state;
         const { isLoading, items } = this.props;
-console.log(this.props);
+
         if (error) {
             return <div>Error: {error.message}</div>;
-        } else if (isLoading) {
-            return <Preloader />;
         } else {
             return (
                 <Fragment>
@@ -121,14 +117,7 @@ console.log(this.props);
                         hasMore={true || false}
                         loader={<div className="loader" key={0}>Loading ...</div>}
                     >*/}
-                        {items.map(item => (
-                            <PostItem key={item.id}
-                                      image={item.image_url}
-                                      name={item.name}
-                                      tagline={item.tagline}
-                                      id={item.id}
-                            />
-                        ))}
+                        <ListBeer list={items} isLoading={isLoading} />
                     {/*</InfiniteScroll>*/}
                 </Fragment>
             );
@@ -139,7 +128,7 @@ console.log(this.props);
 function mapStateToProps (state) {
     return {
         items: state.searchState.beerList,
-        isLoading: state.commonState.isLoading,
+        isLoading: state.commonState.isLoading
     };
 }
 
@@ -147,10 +136,3 @@ export default connect(mapStateToProps, {
     loadBeer,
     setDefault,
 })(MainPage);
-
-/*
-export default connect(mapStateToProps, {
-    loadBeer,
-    setDefault,
-})(withDataLoading(MainPage));
-*/

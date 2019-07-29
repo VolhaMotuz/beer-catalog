@@ -1,14 +1,17 @@
 import React from 'react';
 import Preloader from "../components/common/preloader/preloader";
 
-export default function withLoadData(Component) {
-    return class loadData extends React.Component {
-        isLoading(prop) {
-            return !prop || prop.isLoading;
-        }
+const withLoadData = Component => ({ isLoading, ...props }) => {
 
-        render() {
-            return  <Component {...this.props} />;
-        }
+    if (isLoading) {
+        return <Preloader />
+    } else {
+        return (
+            <div>
+                <Component {...props} />
+            </div>
+        )
     }
-}
+};
+
+export default withLoadData;
