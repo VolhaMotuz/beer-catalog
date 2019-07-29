@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react';
-// import InfiniteScroll from 'react-infinite-scroller';
+import InfiniteScroll from 'react-infinite-scroller';
 import { connect } from "react-redux";
 import { loadBeer, setDefault } from "../../actions/search-actions";
 import SearchPanel from '../../components/search/search';
@@ -17,8 +17,8 @@ class MainPage extends React.Component {
                 abv: 0,
                 ibu: 0,
                 ebc: 0,
-                pageNumber: 0,
-                pageAmount: 25
+                page: 0,
+                perPage: 25
             },
         };
     }
@@ -81,7 +81,8 @@ class MainPage extends React.Component {
     };
 
     handlePageLoader() {
-        this.props.loadBeer();
+        //this.props.loadBeer();
+        console.log('111');
     }
 
     /**
@@ -110,15 +111,15 @@ class MainPage extends React.Component {
                         ebc={filter.ebc}
                         onValueChange={ this.handleFilterValueChange }
                     />
-                    {/*<InfiniteScroll
+                    <InfiniteScroll
                         className="row"
                         pageStart={0}
                         loadMore={this.handlePageLoader}
                         hasMore={true || false}
                         loader={<div className="loader" key={0}>Loading ...</div>}
-                    >*/}
+                    >
                         <ListBeer list={items} isLoading={isLoading} />
-                    {/*</InfiniteScroll>*/}
+                    </InfiniteScroll>
                 </Fragment>
             );
         }
