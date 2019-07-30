@@ -1,5 +1,4 @@
 import React from 'react';
-import Slider from 'react-input-slider';
 import './filter.scss';
 import FilterItem from "./filterItem";
 

@@ -81,11 +81,10 @@ class MainPage extends React.Component {
         });
     };
 
-    handlePageLoader = () => {
-        //this.setState({filter: 2});
-        //this.props.loadBeer(this.state.filter);
-        //let page = this.state.hasMoreItems;
-        //console.log('111');
+
+    handlePageLoader() {
+        //this.props.loadBeer();
+        console.log('111');
     }
 
     /**
@@ -115,15 +114,15 @@ class MainPage extends React.Component {
                         ebc={filter.ebc}
                         onValueChange={this.handleFilterValueChange}
                     />
-                    {/*<InfiniteScroll
+                    <InfiniteScroll
                         className="row"
                         pageStart={0}
                         loadMore={this.handlePageLoader}
                         hasMore={this.state.hasMoreItems}
                         loader={<div className="loader" key={0}>Loading ...</div>}
-                    >*/}
+                    >
                         <ListBeer list={items} isLoading={isLoading} />
-                    {/*</InfiniteScroll>*/}
+                    </InfiniteScroll>
                 </Fragment>
             );
         }
