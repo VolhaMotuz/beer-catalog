@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react';
-// import InfiniteScroll from 'react-infinite-scroller';
+import InfiniteScroll from 'react-infinite-scroller';
 import { connect } from "react-redux";
 import { loadBeer, setDefault } from "../../actions/search-actions";
 import SearchPanel from '../../components/search/search';
@@ -12,13 +12,14 @@ class MainPage extends React.Component {
         super(props);
         this.state = {
             error: null,
+            hasMoreItems: true,
             filter: {
                 name: '',
                 abv: 0,
                 ibu: 0,
                 ebc: 0,
-                pageNumber: 0,
-                pageAmount: 25
+                page: 0,
+                per_page: 25
             },
         };
     }
@@ -80,8 +81,11 @@ class MainPage extends React.Component {
         });
     };
 
-    handlePageLoader() {
-        this.props.loadBeer();
+    handlePageLoader = () => {
+        //this.setState({filter: 2});
+        //this.props.loadBeer(this.state.filter);
+        //let page = this.state.hasMoreItems;
+        //console.log('111');
     }
 
     /**
@@ -89,6 +93,7 @@ class MainPage extends React.Component {
      * @returns {*}
      */
     render() {
+        //console.log(this.state);
         const { error, filter } = this.state;
         const { isLoading, items } = this.props;
 
@@ -108,13 +113,13 @@ class MainPage extends React.Component {
                         abv={filter.abv}
                         ibu={filter.ibu}
                         ebc={filter.ebc}
-                        onValueChange={ this.handleFilterValueChange }
+                        onValueChange={this.handleFilterValueChange}
                     />
                     {/*<InfiniteScroll
                         className="row"
                         pageStart={0}
                         loadMore={this.handlePageLoader}
-                        hasMore={true || false}
+                        hasMore={this.state.hasMoreItems}
                         loader={<div className="loader" key={0}>Loading ...</div>}
                     >*/}
                         <ListBeer list={items} isLoading={isLoading} />
